@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neurosynth 前端 Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="flex flex-col md:flex-row h-screen">
+    <!-- 左側：搜尋與詞彙列表 -->
+    <div class="md:w-2/5 w-full bg-white border-r border-gray-200 flex flex-col p-4">
+      <label class="font-semibold mb-2">搜尋詞彙</label>
+      <div id="inputGroup" class="space-y-2 mb-4">
+        <div class="flex items-center space-x-2">
+          <input type="text" class="termInput px-3 py-2 border rounded focus:outline-none focus:ring w-full" placeholder="輸入關鍵字..." autocomplete="off">
+          <button id="addPlus" class="w-8 h-8 flex items-center justify-center bg-green-500 text-white text-lg rounded hover:bg-green-600" title="新增交集欄位">+</button>
+          <button id="addMinus" class="w-8 h-8 flex items-center justify-center bg-red-500 text-white text-lg rounded hover:bg-red-600" title="新增差集欄位">-</button>
+        </div>
+      </div>
+      <ul id="termList" class="flex-1 overflow-y-auto bg-gray-50 rounded p-2 border text-sm"></ul>
+    </div>
+    <!-- 右側：相關詞彙與研究 -->
+    <div class="md:w-3/5 w-full flex flex-col">
+      <!-- 右上：相關詞彙 -->
+      <div class="flex-1 p-4 border-b border-gray-200">
+        <div class="flex items-center mb-2">
+          <h2 class="font-semibold">相關詞彙 (Top 10)</h2>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-sm text-left border" id="relatedTable">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="px-3 py-2 border">詞彙</th>
+                <th class="px-3 py-2 border">共同出現次數</th>
+                <th class="px-3 py-2 border">Jaccard</th>
+              </tr>
+            </thead>
+            <tbody id="relatedList"></tbody>
+          </table>
+        </div>
+      </div>
+      <!-- 右下：相關研究 -->
+      <div class="flex-1 p-4 overflow-y-auto">
+        <div class="flex items-center mb-2">
+          <h2 class="font-semibold">相關研究</h2>
+          <span id="studyCount" class="ml-2 text-xs text-gray-500"></span>
+        </div>
+        <ul id="studyList" class="space-y-4"></ul>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
